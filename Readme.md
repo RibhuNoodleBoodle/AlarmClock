@@ -1,68 +1,100 @@
-# Alarm Clock App
+# Alarm Clock Application
 
-This is an alarm clock application built using Angular, Spring Boot, RabbitMQ, MongoDB, MySQL, Docker, and Neo4j. The application allows users to create and manage alarms, with support for scheduling, editing, and deleting alarms.
-## Requirements
+This is a Spring Boot application that provides an alarm clock service with REST API support.
+## Prerequisites
 
-To run this application, you'll need to have the following software installed on your system:
-- Java 20 or later
-- Angular CLI
-- RabbitMQ
-- MongoDB
-- MySQL
-- Docker
-- Neo4j
+To build and run this application, you need to have the following tools installed:
+- JDK 20 or later
+- Maven 3.6 or later
+- Docker (optional)
 ## Getting Started
 
-To get started with this application, follow these steps:
-1. Clone this repository to your local machine. 
-2. Start RabbitMQ, MongoDB, MySQL, and Neo4j using the Docker Compose file provided in the `docker/` directory:
-
-```
-
-docker-compose up -d
-``` 
-3. Open a terminal window and navigate to the `backend/` directory. 
-4. Start the Spring Boot application:
+To build and run the application locally, follow these steps:
+1. Clone the repository to your local machine:
 
 ```bash
 
-./gradlew bootRun
-``` 
-5. Open another terminal window and navigate to the `frontend/` directory. 
-6. Install the Node.js dependencies:
-
+git clone https://github.com/your-username/alarm-clock.git
 ```
 
-npm install
-``` 
-7. Start the Angular development server:
 
+1. Navigate to the project root directory:
+
+```bash
+
+cd alarm-clock
 ```
 
-ng serve
-``` 
-8. Open a web browser and navigate to `http://localhost:4200` to view the application.
-## Features
 
-The alarm clock application includes the following features:
-- Create new alarms with a title, time, and repeat interval.
-- Edit existing alarms.
-- Delete alarms.
-- View a list of all alarms.
-- Sort alarms by time or title.
-- Filter alarms by title.
-- Schedule alarms to trigger at the specified time.
-- Automatically reschedule repeating alarms.
-- Display a notification when an alarm triggers.
-## Architecture
+1. Build the application using Maven:
 
-The alarm clock application is built using a microservices architecture, with the following components:
-- A Spring Boot backend that provides REST APIs for managing alarms and scheduling notifications.
-- A RabbitMQ message broker that handles message passing between the backend and frontend.
-- A MongoDB database that stores alarm data.
-- A MySQL database that stores notification data.
-- A Neo4j database that stores user data and relationships between alarms and users.
-- An Angular frontend that provides a user interface for managing alarms.
-## Contributing
+```go
 
-If you'd like to contribute to this project, please fork the repository and submit a pull request.
+mvn package
+```
+
+
+
+This will compile the source code, run the unit tests, and create an executable JAR file in the `target/` directory.
+1. (Optional) If you have Docker installed, you can build a Docker image of the application:
+
+```lua
+
+docker build -t alarm-clock .
+```
+
+
+
+This will create a Docker image with the tag `alarm-clock`.
+1. Run the application:
+
+```bash
+
+java -jar target/alarm-clock-1.0.0.jar
+```
+
+
+
+This will start the application on port 8080. You can access the API endpoints using a web browser or a tool like `curl` or `Postman`.
+1. (Optional) If you have Docker installed, you can run the Docker image instead:
+
+```arduino
+
+docker run -p 8080:8080 alarm-clock
+```
+
+
+
+This will start a Docker container with the application running inside.
+## API Endpoints
+
+The following API endpoints are available: 
+- `GET /alarms` - retrieves a list of all alarms 
+- `GET /alarms/{id}` - retrieves an alarm by ID 
+- `POST /alarms` - creates a new alarm 
+- `PUT /alarms/{id}` - updates an existing alarm by ID 
+- `DELETE /alarms/{id}` - deletes an alarm by ID
+## Configuration
+
+The application can be configured by editing the `application.properties` file in the `src/main/resources` directory. The following settings are available: 
+- `server.port` - the port number that the application listens on (default: 8080) 
+- `spring.datasource.url` - the URL of the MySQL database (default: jdbc:mysql://localhost:3306/alarm_clock) 
+- `spring.datasource.username` - the username to use when connecting to the MySQL database (default: root) 
+- `spring.datasource.password` - the password to use when connecting to the MySQL database (default: password)
+## Testing
+
+To run the unit tests for the application, use the following command:
+
+```bash
+
+mvn test
+```
+
+
+
+This will compile the test classes and run them using JUnit. The test results will be displayed in the console.
+## Deployment
+
+To deploy the application to a production environment, you can use any standard Java web server, such as Tomcat or Jetty. Simply copy the executable JAR file to the server and start it using the `java -jar` command.
+
+Alternatively, you can deploy the application to a cloud platform, such as Heroku or AWS Elastic Beanstalk, using the Docker image. Simply upload the Docker image to the platform and configure the platform to run the container on port 8080.
